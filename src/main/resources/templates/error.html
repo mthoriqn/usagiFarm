@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Rabbit Farm Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .header { background-color: #d9534f; /* Error Red */ color: white; padding: 15px 20px; text-align: center; width: 100%; box-sizing: border-box; }
+        .header h1 { margin: 0; }
+        .error-container { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 50px; width: 100%; max-width: 700px; text-align: center; }
+        .error-container h2 { color: #d9534f; margin-bottom: 15px; }
+        .error-details { text-align: left; background-color: #f9f9f9; padding: 15px; border-radius: 4px; margin-top: 20px; border: 1px solid #eee; }
+        .error-details p { margin: 8px 0; }
+        .error-details strong { color: #333; }
+        .home-link { display: inline-block; margin-top: 25px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; }
+        .home-link:hover { background-color: #45a049; }
+        .stacktrace { text-align: left; font-size: 0.8em; color: #666; max-height: 200px; overflow-y: auto; border: 1px solid #eee; padding: 10px; margin-top:10px; background-color: #fdfdfd; white-space: pre-wrap; /* Preserve line breaks and spaces */ }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Application Error</h1>
+    </div>
+
+    <div class="error-container">
+        <h2>Oops! Something went wrong.</h2>
+        <p>We encountered an error processing your request. Please try again later or contact support if the problem persists.</p>
+
+        <div th:if="${status}" class="error-details">
+            <p><strong>Status Code:</strong> <span th:text="${status}"></span></p>
+            <p th:if="${error}"><strong>Error:</strong> <span th:text="${error}"></span></p>
+            <p th:if="${message}"><strong>Message:</strong> <span th:text="${message}"></span></p>
+            <p th:if="${path}"><strong>Path:</strong> <span th:text="${path}"></span></p>
+            <p th:if="${timestamp}"><strong>Timestamp:</strong> <span th:text="${#dates.format(timestamp, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+
+            <!-- Stack trace - useful for development, might be hidden in production -->
+            <!-- Check if 'trace' attribute is available and not empty -->
+            <div th:if="${trace}">
+                 <details>
+                    <summary style="cursor:pointer; color: #007bff;">View Stack Trace (for developers)</summary>
+                    <pre class="stacktrace" th:text="${trace}"></pre>
+                </details>
+            </div>
+        </div>
+
+        <div th:unless="${status}" class="error-details">
+             <p>An unexpected error occurred and detailed information is not available.</p>
+        </div>
+
+        <a th:href="@{/}" class="home-link">Go to Dashboard</a>
+    </div>
+
+</body>
+</html>
