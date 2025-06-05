@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable() // Disable CSRF for simpler API testing (consider enabling for production with proper handling)
             .authorizeRequests()
-                .antMatchers("/api/auth/register", "/login.html", "/index.html", "/css/**", "/js/**", "/images/**").permitAll() // Public endpoints and static resources
+                .antMatchers("/", "/dashboard", "/api/auth/register", "/login.html", "/index.html", "/css/**", "/js/**", "/images/**").permitAll() // Public endpoints and static resources
                 .antMatchers("/api/**").authenticated() // Secure API endpoints
                 // .antMatchers("/api/admin/**").hasRole("ADMIN") // Example for role-based access
                 .anyRequest().authenticated() // All other requests need authentication
@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
                 .loginPage("/login.html") // Custom login page
                 .loginProcessingUrl("/login") // URL to submit the username and password to
-                .defaultSuccessUrl("/rabbits.html", true) // Page to redirect to on successful login
+                .defaultSuccessUrl("/", true) // Page to redirect to on successful login
                 .failureUrl("/login.html?error=true") // Page to redirect to on failure
                 .permitAll()
             .and()
