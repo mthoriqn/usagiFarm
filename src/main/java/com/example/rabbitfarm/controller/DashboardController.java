@@ -41,4 +41,13 @@ public class DashboardController {
         model.addAttribute("welcomeMessage", "Welcome to the Rabbit Farm Management System!");
         return "dashboard";
     }
+
+    @GetMapping("/login.html") // Explicitly map /login.html
+    public String loginPage() {
+        // Spring Security handles the actual login page rendering through its configuration,
+        // but this mapping ensures a controller is available for the /login.html path
+        // if direct access or specific dispatching requires it.
+        // It will resolve to src/main/resources/templates/login.html
+        return "login";
+    }
 }
