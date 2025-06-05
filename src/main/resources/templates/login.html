@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style> body { font-family: Arial, sans-serif; margin: 20px; } h1 { color: #4CAF50; } .login-container { width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; } input { width: 100%; padding: 10px; margin-bottom:10px; box-sizing: border-box; } button { background-color: #4CAF50; color:white; padding:10px 15px; border:none; border-radius:3px; cursor:pointer;} </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form action="/login" method="post"> <!-- This action will need Spring Security handling -->
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit">Log In</button>
+            </div>
+        </form>
+        <p><a href="index.html">Back to Home</a></p>
+    </div>
+</body>
+</html>
